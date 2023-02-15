@@ -17,7 +17,7 @@ cd ${CODESPACES_REPO_ROOT}
 if [ "${INSTALL_MAGENTO}" = "YES" ]; then
   ddev redis-cli flushall
   ddev exec rm -rf /var/www/html/var/cache/ /var/www/html/generated/
-  cp .gitpod/config.php app/etc/config.php
+  cp .devcontainer/config.php app/etc/config.php
   rm -rf app/etc/env.php
   ddev magento setup:install --db-name='db' --db-user='db' --db-password='db' --base-url=$url --backend-frontname='admin' --admin-user=$MAGENTO_ADMIN_USERNAME --admin-password=$MAGENTO_ADMIN_PASSWORD --admin-email=$GITPOD_GIT_USER_EMAIL --admin-firstname='Admin' --admin-lastname='User' --use-rewrites='1' --use-secure='1' --base-url-secure=$url --use-secure-admin='1' --language='en_US' --db-host='db' --cleanup-database --timezone='America/Chicago' --currency='USD' --session-save='files' --search-engine='elasticsearch7' --elasticsearch-host='elasticsearch' --elasticsearch-port='9200' || true
   #Run setup:install again because of error when installing Magento from scratch.
@@ -38,21 +38,21 @@ if [ "${INSTALL_HYVA}" = "YES" ] && [ ! -z "${HYVA_COMPOSER_TOKEN}" ] && [ ! -z 
     ddev composer require hyva-themes/magento2-default-theme
 fi
 
-if [ "${INSTALL_MAGENTO}" = "NO" ] && [ -f ".gitpod/magento-db.sql.zip" ]; then
-  ddev import-db --src=.gitpod/magento-db.sql.zip
+if [ "${INSTALL_MAGENTO}" = "NO" ] && [ -f ".devcontainer/magento-db.sql.zip" ]; then
+  ddev import-db --src=.devcontainer/magento-db.sql.zip
 else
-  echo "No database was imported. No .gitpod/magento-db.sql.zip was provided."
+  echo "No database was imported. No .devcontainer/magento-db.sql.zip was provided."
 fi
-if [ -f ".gitpod/files.tgz" ]; then
-  ddev import-files --src=.gitpod/files.tgz
+if [ -f ".devcontainer/files.tgz" ]; then
+  ddev import-files --src=.devcontainer/files.tgz
 else
-  echo "No files.tgz was provided in .gitpod"
+  echo "No files.tgz was provided in .devcontainer"
 fi
 
 ddev magento deploy:mode:set developer
 ddev magento setup:upgrade
 ddev magento config:set web/cookie/cookie_path "/"
-ddev magento config:set web/cookie/cookie_domain ".gitpod.io"
+ddev magento config:set web/cookie/cookie_domain ".devcontainer.io"
 ddev magento setup:store-config:set --base-url="${url}"
 ddev magento setup:store-config:set --base-url-secure="${url}"
 ddev magento setup:config:set --session-save=redis --session-save-redis-host=redis --session-save-redis-log-level=3 --session-save-redis-db=0 --session-save-redis-port=6379 -n;
@@ -89,5 +89,4 @@ fi
 ddev magento cache:flush
 ddev redis-cli flushall
 
-touch ${CODESPACES_REPO_ROOT}/.gitpod/db-installed.flag
-gp ports await 8080 && sleep 5 && gp preview $(gp url 8080)
+touch ${CODESPACES_REPO_ROOT}/.devcontainer/db-installed.flag
