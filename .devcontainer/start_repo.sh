@@ -2,8 +2,8 @@
 
 set -eu
 
-url=$(gp url | awk -F"//" {'print $2'}) && url+="/" &&
-url="https://8080-"$url"/"
+url=$(jq -r ".CODESPACE_NAME" /workspaces/.codespaces/shared/environment-variables.json)
+url="https://"$url".github.dev/"
 
 MAGENTO_EDITION="${MAGENTO_EDITION:=community}"
 MAGENTO_VERSION="${MAGENTO_VERSION:=2.4.5-p1}"
