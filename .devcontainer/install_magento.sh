@@ -20,6 +20,7 @@ if [ "${INSTALL_MAGENTO}" = "YES" ]; then
   ddev exec rm -rf /var/www/html/var/cache/ /var/www/html/generated/
   cp .devcontainer/config.php app/etc/config.php
   rm -rf app/etc/env.php
+  ddev composer config -g -a http-basic.repo.magento.com ${MAGENTO_COMPOSER_AUTH_USER} ${MAGENTO_COMPOSER_AUTH_PASS}
   ddev magento setup:install --db-name='db' --db-user='db' --db-password='db' --base-url=$url --backend-frontname='admin' --admin-user=$MAGENTO_ADMIN_USERNAME --admin-password=$MAGENTO_ADMIN_PASSWORD --admin-email=$MAGENTO_ADMIN_EMAIL --admin-firstname='Admin' --admin-lastname='User' --use-rewrites='1' --use-secure='1' --base-url-secure=$url --use-secure-admin='1' --language='en_US' --db-host='db' --cleanup-database --timezone='America/Chicago' --currency='USD' --session-save='files' --search-engine='elasticsearch7' --elasticsearch-host='elasticsearch' --elasticsearch-port='9200' || true
   #Run setup:install again because of error when installing Magento from scratch.
   ddev magento setup:install --db-name='db' --db-user='db' --db-password='db' --base-url=$url --backend-frontname='admin' --admin-user=$MAGENTO_ADMIN_USERNAME --admin-password=$MAGENTO_ADMIN_PASSWORD --admin-email=$MAGENTO_ADMIN_EMAIL --admin-firstname='Admin' --admin-lastname='User' --use-rewrites='1' --use-secure='1' --base-url-secure=$url --use-secure-admin='1' --language='en_US' --db-host='db' --cleanup-database --timezone='America/Chicago' --currency='USD' --session-save='files' --search-engine='elasticsearch7' --elasticsearch-host='elasticsearch' --elasticsearch-port='9200';
