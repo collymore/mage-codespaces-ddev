@@ -3,7 +3,7 @@
 set -eu
 
 url=$(jq -r ".CODESPACE_NAME" /workspaces/.codespaces/shared/environment-variables.json)
-url="https://"$url".preview.github.dev/"
+url="https://"$url".preview.app.github.dev/"
 
 MAGENTO_EDITION="${MAGENTO_EDITION:=community}"
 MAGENTO_VERSION="${MAGENTO_VERSION:=2.4.5-p1}"
