@@ -3,7 +3,7 @@
 set -eu
 
 url=$(jq -r ".CODESPACE_NAME" /workspaces/.codespaces/shared/environment-variables.json)
-url="https://"$url".github.dev/"
+url="https://"$url".preview.app.github.dev/"
 
 INSTALL_MAGENTO="${INSTALL_MAGENTO:=YES}"
 INSTALL_SAMPLE_DATA="${INSTALL_SAMPLE_DATA:=YES}"
