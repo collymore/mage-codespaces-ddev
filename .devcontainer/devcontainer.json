@@ -31,5 +31,5 @@
       3306
     ],
     "postCreateCommand": "bash -c 'ddev config global --omit-containers=ddev-router && ddev config --auto && ddev debug download-images'",
-    "postStartCommand": "chmod +x .devcontainer/start_repo.sh && .devcontainer/start_repo.sh && chmod +x .devcontainer/install_magento.sh && test ! -f .devcontainer/db-installed.flag && .devcontainer/install_magento.sh;",
+    "postStartCommand": "bash -c 'chmod +x .devcontainer/start_repo.sh && .devcontainer/start_repo.sh && chmod +x .devcontainer/install_magento.sh && test ! -f .devcontainer/db-installed.flag && .devcontainer/install_magento.sh;'",
 }
