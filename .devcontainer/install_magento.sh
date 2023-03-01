@@ -2,6 +2,11 @@
 
 set -eu
 
+if [ -f ".devcontainer/db-installed.flag" ]; then
+  #if db install installed then Magento does not need installed.
+  exit 0
+fi
+
 url=$(jq -r ".CODESPACE_NAME" /workspaces/.codespaces/shared/environment-variables.json)
 url="https://"$url".preview.app.github.dev/"
 
