@@ -7,8 +7,8 @@ if [ -f ".devcontainer/db-installed.flag" ]; then
   exit 0
 fi
 
-url=$(jq -r ".CODESPACE_NAME" /workspaces/.codespaces/shared/environment-variables.json)
-url="https://"$url".preview.app.github.dev/"
+#url=$(jq -r ".CODESPACE_NAME" /workspaces/.codespaces/shared/environment-variables.json)
+url="https://magento2.test/"
 
 INSTALL_MAGENTO="${INSTALL_MAGENTO:=YES}"
 INSTALL_SAMPLE_DATA="${INSTALL_SAMPLE_DATA:=YES}"
