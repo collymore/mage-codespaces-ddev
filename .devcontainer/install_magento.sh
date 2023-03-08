@@ -7,8 +7,7 @@ if [ -f ".devcontainer/db-installed.flag" ]; then
   exit 0
 fi
 
-#url=$(jq -r ".CODESPACE_NAME" /workspaces/.codespaces/shared/environment-variables.json)
-url="https://magento2.test/"
+url=$(jq -r ".CODESPACE_NAME" /workspaces/.codespaces/shared/environment-variables.json)
 
 INSTALL_MAGENTO="${INSTALL_MAGENTO:=YES}"
 INSTALL_SAMPLE_DATA="${INSTALL_SAMPLE_DATA:=YES}"
@@ -60,7 +59,7 @@ fi
 ddev magento deploy:mode:set developer
 ddev magento setup:upgrade
 ddev magento config:set web/cookie/cookie_path "/"
-ddev magento config:set web/cookie/cookie_domain ".devcontainer.io"
+ddev magento config:set web/cookie/cookie_domain ".github.dev"
 ddev magento setup:store-config:set --base-url="${url}"
 ddev magento setup:store-config:set --base-url-secure="${url}"
 ddev magento setup:config:set --session-save=redis --session-save-redis-host=redis --session-save-redis-log-level=3 --session-save-redis-db=0 --session-save-redis-port=6379 -n;
