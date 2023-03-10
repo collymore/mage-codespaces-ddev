@@ -61,6 +61,7 @@ ddev magento deploy:mode:set developer
 ddev magento setup:upgrade
 ddev magento config:set web/cookie/cookie_path "/"
 ddev magento config:set web/cookie/cookie_domain ".github.dev"
+ddev magento config:set web/url/redirect_to_base "0"
 ddev magento setup:store-config:set --base-url="${url}"
 ddev magento setup:store-config:set --base-url-secure="${url}"
 ddev magento setup:config:set --session-save=redis --session-save-redis-host=redis --session-save-redis-log-level=3 --session-save-redis-db=0 --session-save-redis-port=6379 -n;
