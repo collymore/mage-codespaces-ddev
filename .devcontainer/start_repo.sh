@@ -21,9 +21,6 @@ else
   git reset && git checkout . && git checkout -- .gitignore;
 fi
 
-sed -i "s/AUTH_USER/${MAGENTO_COMPOSER_AUTH_USER}/g" ${CODESPACES_REPO_ROOT}/auth.json &&
-sed -i "s/AUTH_PASS/${MAGENTO_COMPOSER_AUTH_PASS}/g" ${CODESPACES_REPO_ROOT}/auth.json &&
-
 if [ ! -f bin/magerun2 ]; then
   ddev exec curl -L https://files.magerun.net/n98-magerun2.phar --output bin/magerun2
   ddev exec chmod +x bin/magerun2
