@@ -37,6 +37,32 @@ This repository contains a GitHub Codespaces configuration for a Magento 2 cloud
 * Install the GitHub CLI ([GitHub CLI](https://docs.github.com/en/codespaces/developing-in-codespaces/using-github-codespaces-with-github-cli)). Use the GitHub CLI to view the codespace logs and SSH into the codespace environment.
 * Ensure you have the relevant license keys to hand (for Adobe Commerce and Hyvä Themes only)
 
+### Magento Open Source:
+1. Add variables to your account at [adding a secret](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-encrypted-secrets-for-your-codespaces#adding-a-secret) for `MAGENTO_COMPOSER_AUTH_USER` and `MAGENTO_COMPOSER_AUTH_PASS` with composer credentials that have access to Magento open source.
+2. See the codespaces documentation for the steps to start a new codespaces environment. ([create a codespace for a repository](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository)).
+3. Run the `gh codespace ports` . Open the 8080 port URL in a browser to view the Magento frontend.
+
+### Adobe Commerce (installs the B2B extension):
+1. Add variables to your account at [adding a secret](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-encrypted-secrets-for-your-codespaces#adding-a-secret) for `MAGENTO_EDITION` set to "enterprise",  `MAGENTO_COMPOSER_AUTH_USER` and `MAGENTO_COMPOSER_AUTH_PASS` with composer credentials that have access to the Adobe Commerce repos.
+2. See the codespaces documentation for the steps to start a new codespaces environment. ([create a codespace for a repository](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository)). 
+3. Run the `gh codespace ports` . Open the 8080 port URL in a browser to view the Magento frontend.
+
+> \*Note: you must supply your own composer credentials to allow install of Adobe Commerce.
+
+### Hyvä Themes (Magento Open Source):
+1. Add variables to your account at [adding a secret](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-encrypted-secrets-for-your-codespaces#adding-a-secret) for `INSTALL_HYVA` set to YES, `HYVA_COMPOSER_TOKEN` and `HYVA_COMPOSER_PROJECT` with your Hyvä Themes composer token and project name (see [Hyvä's install docs](https://docs.hyva.io/hyva-themes/getting-started/index.html) for more detail).
+2. See the codespaces documentation for the steps to start a new codespaces environment. ([create a codespace for a repository](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository)). 
+3. Run the `gh codespace ports` . Open the 8080 port URL in a browser to view the Magento frontend.
+
+
+> \*Note: you must supply your own Hyvä credentials that where provided to you when purchased a license. Installing Hyvä Themes via git is not supported.
+
+### Hyvä Themes (Adobe Commerce):
+1. Follow the Adobe Commerce and Hyvä Themes steps to add the correct variables.secrets.
+2. See the codespaces documentation for the steps to start a new codespaces environment. ([create a codespace for a repository](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository)).
+3. Run the `gh codespace ports` . Open the 8080 port URL in a browser to view the Magento frontend.
+
+
 ## Accessing the Magento Admin Panel
 The Magento Admin Panel is is available at `/admin` and the username and password are `admin` and `password1` respectively.
 
@@ -62,6 +88,11 @@ Steps to enable blackfire.io for profiling
 * See the ddev documentation for more information. https://ddev.readthedocs.io/en/stable/users/debugging-profiling/blackfire-profiling/
 
 ## GitHub Codespaces Notes
+
+### Recommendations
+* Create a codespace with a 4 core and 8GB memory machine type.
+* Use the `gh codespace logs -f` command to tail the logs when starting a codespace.
+* Use the `gh codespace ssh` command to ssh into the codespace.
 
 ### Overriding Environment Variables
 There are multiple ways to override environment variables, [which are outlined in this guide](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-encrypted-secrets-for-your-codespaces#adding-a-secret), and which option you should choose depends on whether you want to override the configuration for a specific environment only, or every environment you create with GitHub Codespaces.
