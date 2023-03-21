@@ -3,7 +3,7 @@
 set -eu
 
 MAGENTO_EDITION="${MAGENTO_EDITION:=community}"
-MAGENTO_VERSION="${MAGENTO_VERSION:=2.4.5-p1}"
+MAGENTO_VERSION="${MAGENTO_VERSION:=2.4.6}"
 
 cd ${CODESPACES_REPO_ROOT}
 # Temporarily use an empty config.yaml to get ddev to use defaults
