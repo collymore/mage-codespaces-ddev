@@ -67,7 +67,6 @@ ddev magento setup:store-config:set --base-url-secure="${url}"
 ddev magento setup:config:set --session-save=redis --session-save-redis-host=redis --session-save-redis-log-level=3 --session-save-redis-db=0 --session-save-redis-port=6379 -n;
 ddev magento setup:config:set --cache-backend=redis --cache-backend-redis-server=redis --cache-backend-redis-db=1 -n;
 ddev magento setup:config:set --page-cache=redis --page-cache-redis-server=redis --page-cache-redis-db=2 -n;
-ddev magento module:disable Magento_Csp Magento_TwoFactorAuth
 
 if [ "${MAGENTO_EDITION}" = "enterprise" ]; then
     ddev exec magerun2 config:store:set btob/website_configuration/company_active "1"
