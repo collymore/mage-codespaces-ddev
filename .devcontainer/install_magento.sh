@@ -69,30 +69,30 @@ ddev magento setup:config:set --cache-backend=redis --cache-backend-redis-server
 ddev magento setup:config:set --page-cache=redis --page-cache-redis-server=redis --page-cache-redis-db=2 -n;
 
 if [ "${MAGENTO_EDITION}" = "enterprise" ]; then
-    ddev exec magerun2 config:store:set btob/website_configuration/company_active "1"
-    ddev exec magerun2 config:store:set btob/website_configuration/sharedcatalog_active "0"
-    ddev exec magerun2 config:store:set btob/website_configuration/negotiablequote_active "0"
-    ddev exec magerun2 config:store:set btob/website_configuration/quickorder_active "0"
-    ddev exec magerun2 config:store:set btob/website_configuration/requisition_list_active "0"
-    ddev exec magerun2 config:store:set btob/default_b2b_payment_methods/available_payment_methods "braintree_ach_direct_debit,braintree_applepay,banktransfer,cashondelivery,checkmo,braintree,payflow_advanced,payflow_link,payflowpro,braintree_googlepay,braintree_local_payment,free,braintree_paypal,paypal_billing_agreement,payflow_express_bml,paypal_express_bml,paypal_express,payflow_express,hosted_pro,companycredit,purchaseorder,braintree_paypal_vault,braintree_cc_vault,payflowpro_cc_vault,braintree_venmo"
-    ddev exec magerun2 config:store:set btob/default_b2b_shipping_methods/applicable_shipping_methods "0"
-    ddev exec magerun2 config:store:set btob/website_configuration/purchaseorder_enabled "1"
-    ddev exec magerun2 config:store:set catalog/magento_catalogpermissions/enabled "1"
-    ddev exec magerun2 config:store:set catalog/magento_catalogpermissions/grant_catalog_category_view "1"
-    ddev exec magerun2 config:store:set catalog/magento_catalogpermissions/grant_catalog_product_price "1"
-    ddev exec magerun2 config:store:set catalog/magento_catalogpermissions/grant_checkout_items "1"
-    ddev exec magerun2 config:store:set sales/product_sku/my_account_enable "1"
+    ddev exec bin/magerun2 config:store:set btob/website_configuration/company_active "1"
+    ddev exec bin/magerun2 config:store:set btob/website_configuration/sharedcatalog_active "0"
+    ddev exec bin/magerun2 config:store:set btob/website_configuration/negotiablequote_active "0"
+    ddev exec bin/magerun2 config:store:set btob/website_configuration/quickorder_active "0"
+    ddev exec bin/magerun2 config:store:set btob/website_configuration/requisition_list_active "0"
+    ddev exec bin/magerun2 config:store:set btob/default_b2b_payment_methods/available_payment_methods "braintree_ach_direct_debit,braintree_applepay,banktransfer,cashondelivery,checkmo,braintree,payflow_advanced,payflow_link,payflowpro,braintree_googlepay,braintree_local_payment,free,braintree_paypal,paypal_billing_agreement,payflow_express_bml,paypal_express_bml,paypal_express,payflow_express,hosted_pro,companycredit,purchaseorder,braintree_paypal_vault,braintree_cc_vault,payflowpro_cc_vault,braintree_venmo"
+    ddev exec bin/magerun2 config:store:set btob/default_b2b_shipping_methods/applicable_shipping_methods "0"
+    ddev exec bin/magerun2 config:store:set btob/website_configuration/purchaseorder_enabled "1"
+    ddev exec bin/magerun2 config:store:set catalog/magento_catalogpermissions/enabled "1"
+    ddev exec bin/magerun2 config:store:set catalog/magento_catalogpermissions/grant_catalog_category_view "1"
+    ddev exec bin/magerun2 config:store:set catalog/magento_catalogpermissions/grant_catalog_product_price "1"
+    ddev exec bin/magerun2 config:store:set catalog/magento_catalogpermissions/grant_checkout_items "1"
+    ddev exec bin/magerun2 config:store:set sales/product_sku/my_account_enable "1"
 fi &&
 
 if [ "${INSTALL_HYVA}" = "YES" ] && [ ! -z "${HYVA_COMPOSER_TOKEN}" ] && [ ! -z "${HYVA_COMPOSER_PROJECT}" ]; then
     # TODO: find a more reliable way to check hyva/default theme ID
-    if ddev exec magerun2 dev:theme:list | grep -q "spectrum"; then
-        ddev exec magerun2 config:store:set design/theme/theme_id 6
+    if ddev exec bin/magerun2 dev:theme:list | grep -q "spectrum"; then
+        ddev exec bin/magerun2 config:store:set design/theme/theme_id 6
     else
-        ddev exec magerun2 config:store:set design/theme/theme_id 5
+        ddev exec bin/magerun2 config:store:set design/theme/theme_id 5
     fi
 
-    ddev exec magerun2 config:store:set customer/captcha/enable 0
+    ddev exec bin/magerun2 config:store:set customer/captcha/enable 0
 fi
 ddev magento cache:flush
 ddev redis-cli flushall
