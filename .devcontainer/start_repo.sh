@@ -6,12 +6,20 @@ MAGENTO_EDITION="${MAGENTO_EDITION:=community}"
 MAGENTO_VERSION="${MAGENTO_VERSION:=2.4.6}"
 
 cd ${CODESPACES_REPO_ROOT}
+
+# Wait for Docker to be ready
+until docker info >/dev/null 2>&1; do
+    echo "Waiting for Docker to start..."
+    sleep 1
+done
+echo "Docker is ready."
+
 # Temporarily use an empty config.yaml to get ddev to use defaults
 # so we can do composer install. If there's already one there,
 # this does no harm.
 mkdir -p .ddev && touch .ddev/config.yaml
 
-# If there's a composer.json, do `ddev composer install` (which auto-starts projct)
+# If there's a composer.json, do `ddev composer install` (which auto-starts project)
 if [ -f composer.json ]; then
   ddev start
   ddev composer install
